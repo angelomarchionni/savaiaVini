@@ -8,6 +8,11 @@ const routes: Routes = [
     path: 'cart-modal',
     loadChildren: () => import('./pages/cart-modal/cart-modal.module').then( m => m.CartModalPageModule)
   },
+  {
+    path: 'pagamento',
+    loadChildren: () => import('./pages/pagamento/pagamento.module').then( m => m.PagamentoPageModule)
+  },
+  
 ];
 
 @NgModule({
