@@ -25,7 +25,7 @@ export class PagamentoPage implements OnInit {
 */
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl,FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UsernameValidator } from '../validators/username.validator';
+// import { UsernameValidator } from '../validators/username.validator';
 import { PhoneValidator } from '../validators/phone.validator';
 import { PasswordValidator } from '../validators/password.validator';
 import { CountryPhone } from './country-phone.model';
@@ -78,25 +78,29 @@ export class PagamentoPage implements OnInit {
     });
 
     let country = new FormControl(this.countries[0], Validators.required);
+    
     let phone = new FormControl('', Validators.compose([
       Validators.required,
       PhoneValidator.validCountryPhone(country)
     ]));
+    
     this.country_phone_group = new FormGroup({
       country: country,
       phone: phone
     });
 
     this.validations_form = this.formBuilder.group({
-      username: new FormControl('', Validators.compose([
-        UsernameValidator.validUsername,
-        Validators.maxLength(25),
-        Validators.minLength(5),
-        Validators.pattern('^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$'),
-        Validators.required
-      ])),
+      // username: new FormControl('', Validators.compose([
+      //   UsernameValidator.validUsername,
+      //   Validators.maxLength(25),
+      //   Validators.minLength(5),
+      //   Validators.pattern('^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$'),
+      //   Validators.required
+      // ])),
       name: new FormControl('', Validators.required),
       lastname: new FormControl('', Validators.required),
+      indirizzo: new FormControl('', Validators.required),
+      citta: new FormControl('', Validators.required),
       email: new FormControl('', Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
@@ -109,15 +113,21 @@ export class PagamentoPage implements OnInit {
   }
 
   validation_messages = {
-    'username': [
-      { type: 'required', message: 'Username is required.' },
-      { type: 'minlength', message: 'Username must be at least 5 characters long.' },
-      { type: 'maxlength', message: 'Username cannot be more than 25 characters long.' },
-      { type: 'pattern', message: 'Your username must contain only numbers and letters.' },
-      { type: 'validUsername', message: 'Your username has already been taken.' }
-    ],
+    // 'username': [
+    //   { type: 'required', message: 'Username is required.' },
+    //   { type: 'minlength', message: 'Username must be at least 5 characters long.' },
+    //   { type: 'maxlength', message: 'Username cannot be more than 25 characters long.' },
+    //   { type: 'pattern', message: 'Your username must contain only numbers and letters.' },
+    //   { type: 'validUsername', message: 'Your username has already been taken.' }
+    // ],
     'name': [
       { type: 'required', message: 'Name is required.' }
+    ],
+    'citta': [
+      { type: 'required', message: 'Stadt is required.' }
+    ],
+    'indirizzo': [
+      { type: 'required', message: 'Adress is required.' }
     ],
     'lastname': [
       { type: 'required', message: 'Last name is required.' }
