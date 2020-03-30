@@ -41,8 +41,8 @@ import { Router } from '@angular/router';
 export class PagamentoPage implements OnInit {
 
   validations_form: FormGroup;
- // matching_passwords_group: FormGroup;
-  country_phone_group: FormGroup;
+ matching_passwords_group: FormGroup;
+ country_phone_group: FormGroup;
 
   countries: Array<CountryPhone>;
   genders: Array<string>;
@@ -84,10 +84,10 @@ export class PagamentoPage implements OnInit {
       //PhoneValidator.validCountryPhone(country)
     ]));
     
-    this.country_phone_group = new FormGroup({
-      country: country,
-      phone: phone
-    });
+     this.country_phone_group = new FormGroup({
+       country: country,
+       phone: phone
+     });
 
     this.validations_form = this.formBuilder.group({
       // username: new FormControl('', Validators.compose([
@@ -101,6 +101,12 @@ export class PagamentoPage implements OnInit {
       lastname: new FormControl('', Validators.required),
       indirizzo: new FormControl('', Validators.required),
       citta: new FormControl('', Validators.required),
+      
+      country: new FormControl('', Validators.required),
+      phone: new FormControl('', Validators.required),
+
+
+
       //email: new FormControl('', Validators.required),
        email: new FormControl('', Validators.compose([
          Validators.required,
@@ -158,6 +164,10 @@ export class PagamentoPage implements OnInit {
   };
 
   onSubmit(values){
+
+
+
+    
     console.log(values);
     this.router.navigate(["/user"]);
   }
