@@ -65,7 +65,7 @@
         <ion-label position="floating" color="primary">Phone</ion-label>
         <!-- <ion-input placeholder="{{ validations_form.value.country_phone.country.sample_phone }}" type="text" formControlName="phone"></ion-input>
 -->      
-<ion-input placeholder="{{ validations_form.value.country_phone.country.sample_phone }}" type="text" name="telefono"></ion-input>
+<ion-input placeholder="0233 456789" type="text" name="phone"></ion-input>
 </ion-item> 
       <!-- <div class="validation-errors">
         <ng-container *ngFor="let validation of validation_messages.phone">
@@ -99,7 +99,7 @@
    
 
 
-    <div formGroupName="matching_passwords">
+    <!-- <div formGroupName="matching_passwords">
       <ion-item>
         <ion-label position="floating" color="primary">Password</ion-label>
         <ion-input type="password" formControlName="password"></ion-input>
@@ -124,14 +124,15 @@
         </ng-container>
       </div>
     </div>
-    <!-- These validations are for the form group -->
+    These validations are for the form group -->
+     <!--
     <div class="validation-errors">
       <ng-container *ngFor="let validation of validation_messages.matching_passwords">
         <div class="error-message" *ngIf="validations_form.get('matching_passwords').hasError(validation.type) && (validations_form.get('matching_passwords').get('confirm_password').dirty || validations_form.get('matching_passwords').get('confirm_password').touched)">
           <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
         </div>
       </ng-container>
-    </div>
+    </div> -->
 
     <ion-item>
       <ion-label color="primary">I accept terms and conditions</ion-label>

@@ -27,7 +27,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl,FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { UsernameValidator } from '../validators/username.validator';
 import { PhoneValidator } from '../validators/phone.validator';
-import { PasswordValidator } from '../validators/password.validator';
+// import { PasswordValidator } from '../validators/password.validator';
 import { CountryPhone } from './country-phone.model';
 import { Router } from '@angular/router';
 
@@ -41,7 +41,7 @@ import { Router } from '@angular/router';
 export class PagamentoPage implements OnInit {
 
   validations_form: FormGroup;
-  matching_passwords_group: FormGroup;
+ // matching_passwords_group: FormGroup;
   country_phone_group: FormGroup;
 
   countries: Array<CountryPhone>;
@@ -65,7 +65,7 @@ export class PagamentoPage implements OnInit {
       "Male",
       "Female"
     ];
-
+/*
     this.matching_passwords_group = new FormGroup({
       password: new FormControl('', Validators.compose([
         Validators.minLength(5),
@@ -76,7 +76,7 @@ export class PagamentoPage implements OnInit {
     }, (formGroup: FormGroup) => {
       return PasswordValidator.areEqual(formGroup);
     });
-
+*/
     let country = new FormControl(this.countries[0], Validators.required);
     
     let phone = new FormControl('', Validators.compose([
@@ -101,13 +101,14 @@ export class PagamentoPage implements OnInit {
       lastname: new FormControl('', Validators.required),
       indirizzo: new FormControl('', Validators.required),
       citta: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-      ])),
+      email: new FormControl('', Validators.required),
+      // email: new FormControl('', Validators.compose([
+      //   Validators.required,
+      //   Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+      // ])),
       //gender: new FormControl(this.genders[0], Validators.required),
       country_phone: this.country_phone_group,
-      matching_passwords: this.matching_passwords_group,
+      // matching_passwords: this.matching_passwords_group,
       terms: new FormControl(true, Validators.pattern('true'))
     });
   }
@@ -140,11 +141,11 @@ export class PagamentoPage implements OnInit {
       { type: 'required', message: 'Phone is required.' },
       { type: 'validCountryPhone', message: 'The phone is incorrect for the selected country.' }
     ],
-    'password': [
-      { type: 'required', message: 'Password is required.' },
-      { type: 'minlength', message: 'Password must be at least 5 characters long.' },
-      { type: 'pattern', message: 'Your password must contain at least one uppercase, one lowercase, and one number.' }
-    ],
+    // 'password': [
+    //   { type: 'required', message: 'Password is required.' },
+    //   { type: 'minlength', message: 'Password must be at least 5 characters long.' },
+    //   { type: 'pattern', message: 'Your password must contain at least one uppercase, one lowercase, and one number.' }
+    // ],
     'confirm_password': [
       { type: 'required', message: 'Confirm password is required.' }
     ],
