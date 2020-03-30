@@ -56,9 +56,9 @@ export class PagamentoPage implements OnInit {
     //  We just use a few random countries, however, you can use the countries you need by just adding them to this list.
     // also you can use a library to get all the countries from the world.
     this.countries = [
-      new CountryPhone('UY', 'Uruguay'),
-      new CountryPhone('US', 'United States'),
-      new CountryPhone('BR', 'Brasil')
+      new CountryPhone('DE', 'Deutschland'),
+      // new CountryPhone('US', 'United States'),
+      // new CountryPhone('BR', 'Brasil')
     ];
 
     this.genders = [
@@ -101,7 +101,7 @@ export class PagamentoPage implements OnInit {
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
-      gender: new FormControl(this.genders[0], Validators.required),
+      //gender: new FormControl(this.genders[0], Validators.required),
       country_phone: this.country_phone_group,
       matching_passwords: this.matching_passwords_group,
       terms: new FormControl(true, Validators.pattern('true'))
