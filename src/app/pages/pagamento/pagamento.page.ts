@@ -81,7 +81,7 @@ export class PagamentoPage implements OnInit {
     
     let phone = new FormControl('', Validators.compose([
       Validators.required,
-      PhoneValidator.validCountryPhone(country)
+      //PhoneValidator.validCountryPhone(country)
     ]));
     
     this.country_phone_group = new FormGroup({
@@ -101,11 +101,11 @@ export class PagamentoPage implements OnInit {
       lastname: new FormControl('', Validators.required),
       indirizzo: new FormControl('', Validators.required),
       citta: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.required),
-      // email: new FormControl('', Validators.compose([
-      //   Validators.required,
-      //   Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-      // ])),
+      //email: new FormControl('', Validators.required),
+       email: new FormControl('', Validators.compose([
+         Validators.required,
+         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+       ])),
       //gender: new FormControl(this.genders[0], Validators.required),
       country_phone: this.country_phone_group,
       // matching_passwords: this.matching_passwords_group,
@@ -146,12 +146,12 @@ export class PagamentoPage implements OnInit {
     //   { type: 'minlength', message: 'Password must be at least 5 characters long.' },
     //   { type: 'pattern', message: 'Your password must contain at least one uppercase, one lowercase, and one number.' }
     // ],
-    'confirm_password': [
-      { type: 'required', message: 'Confirm password is required.' }
-    ],
-    'matching_passwords': [
-      { type: 'areEqual', message: 'Password mismatch.' }
-    ],
+    // 'confirm_password': [
+    //   { type: 'required', message: 'Confirm password is required.' }
+    // ],
+    // 'matching_passwords': [
+    //   { type: 'areEqual', message: 'Password mismatch.' }
+    // ],
     'terms': [
       { type: 'pattern', message: 'You must accept terms and conditions.' }
     ],
