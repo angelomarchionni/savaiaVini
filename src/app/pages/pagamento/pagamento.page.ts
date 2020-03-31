@@ -26,7 +26,7 @@ export class PagamentoPage implements OnInit {
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl,FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { UsernameValidator } from '../validators/username.validator';
-import { PhoneValidator } from '../validators/phone.validator';
+// import { PhoneValidator } from '../validators/phone.validator';
 // import { PasswordValidator } from '../validators/password.validator';
 import { CountryPhone } from './country-phone.model';
 import { Router } from '@angular/router';
@@ -56,8 +56,8 @@ export class PagamentoPage implements OnInit {
     //  We just use a few random countries, however, you can use the countries you need by just adding them to this list.
     // also you can use a library to get all the countries from the world.
     this.countries = [
-      new CountryPhone('DE', 'Deutschland'),
-      // new CountryPhone('US', 'United States'),
+      new CountryPhone('DE', 'Deutschland')
+     // new CountryPhone('US', 'United States')
       // new CountryPhone('BR', 'Brasil')
     ];
 
@@ -78,17 +78,17 @@ export class PagamentoPage implements OnInit {
     });
 */
     let country = new FormControl(this.countries[0], Validators.required);
-    
+    /*
     let phone = new FormControl('', Validators.compose([
       Validators.required,
       //PhoneValidator.validCountryPhone(country)
     ]));
-    
+    /*
      this.country_phone_group = new FormGroup({
        country: country,
        phone: phone
      });
-
+*/
     this.validations_form = this.formBuilder.group({
       // username: new FormControl('', Validators.compose([
       //   UsernameValidator.validUsername,
@@ -101,19 +101,18 @@ export class PagamentoPage implements OnInit {
       lastname: new FormControl('', Validators.required),
       indirizzo: new FormControl('', Validators.required),
       citta: new FormControl('', Validators.required),
-      
       country: new FormControl('', Validators.required),
-      phone: new FormControl('', Validators.required),
-
-
-
-      //email: new FormControl('', Validators.required),
-       email: new FormControl('', Validators.compose([
+      // phone: new FormControl('', Validators.required),
+      phone: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern(/^-?(0|[1-9]\d*)?$/)
+      ])),
+      email: new FormControl('', Validators.compose([
          Validators.required,
          Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
        ])),
       //gender: new FormControl(this.genders[0], Validators.required),
-      country_phone: this.country_phone_group,
+     //country_phone: this.country_phone_group,
       // matching_passwords: this.matching_passwords_group,
       terms: new FormControl(true, Validators.pattern('true'))
     });
