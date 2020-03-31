@@ -59,7 +59,7 @@
       <ion-label position="floating" color="primary">Land</ion-label>
 
  
-      <ion-select formControlName="country" value="DE" okText="OK" cancelText="Dismiss">
+      <ion-select formControlName="country" value="DE" okText="OK" cancelText="Dismiss"  (ionChange)="optionsFn();">
         <ion-select-option value="DE">Deutschland</ion-select-option>
         <ion-select-option value="IT">Italien</ion-select-option>
       </ion-select>

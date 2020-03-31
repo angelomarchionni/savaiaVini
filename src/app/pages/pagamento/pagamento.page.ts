@@ -158,7 +158,11 @@ export class PagamentoPage implements OnInit {
       { type: 'pattern', message: 'You must accept terms and conditions.' }
     ],
   };
-
+  optionsFn() {
+    console.log(this.validations_form.get('country').value);
+    console.log("pppp");
+    
+  }
   
 
   onSubmit(values){
