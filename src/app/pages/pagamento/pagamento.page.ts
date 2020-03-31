@@ -44,6 +44,9 @@ export class PagamentoPage implements OnInit {
   matching_passwords_group: FormGroup;
   country_phone_group: FormGroup;
   totaleDaPagare:string;
+  totaleDaPagareNumero:number;
+  prezzoTrasporto:number;
+  totaleCompresoTrasporto:number;
 
   countries: Array<CountryPhone>;
   genders: Array<string>;
@@ -64,8 +67,11 @@ export class PagamentoPage implements OnInit {
       // new CountryPhone('BR', 'Brasil')
       this.activatedRoute.queryParams.subscribe(params => {
         this.totaleDaPagare = params['totaleGenerale'];
+        this.totaleDaPagareNumero = +this.totaleDaPagare;
         console.log(this.totaleDaPagare);
       });
+      this.prezzoTrasporto=7.02;
+      this.totaleCompresoTrasporto=this.prezzoTrasporto+this.totaleDaPagareNumero;
    //
 
     this.genders = [
@@ -160,8 +166,14 @@ export class PagamentoPage implements OnInit {
   };
   optionsFn() {
     console.log(this.validations_form.get('country').value);
-    console.log("pppp");
-    
+if (this.validations_form.get('country').value=='IT')
+  this.prezzoTrasporto =10.02; 
+  else if 
+  (this.validations_form.get('country').value=='DE')
+  this.prezzoTrasporto =7.02;
+
+    console.log(this.prezzoTrasporto);
+    this.totaleCompresoTrasporto= this.prezzoTrasporto+this.totaleCompresoTrasporto;
   }
   
 
