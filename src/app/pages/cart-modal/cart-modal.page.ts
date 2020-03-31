@@ -43,7 +43,7 @@ export class CartModalPage implements OnInit {
   async checkout() {
     // Perfom PayPal or Stripe checkout process
      this.router.navigate(['/pagamento'],
-          {queryParams: {totaleGenerale: "pippo", test: "pluto"}});
+          {queryParams: {totaleGenerale: this.getTotal(), test: "pluto"}});
           this.modalCtrl.dismiss();
      /*    
     let alert = await this.alertCtrl.create({

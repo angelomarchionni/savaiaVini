@@ -29,7 +29,7 @@ import { Validators, FormBuilder, FormGroup, FormControl,FormsModule, ReactiveFo
 // import { PhoneValidator } from '../validators/phone.validator';
 // import { PasswordValidator } from '../validators/password.validator';
 import { CountryPhone } from './country-phone.model';
-import { Router } from '@angular/router';
+import {Router, ActivatedRoute, Params} from '@angular/router';
 
 
 
@@ -41,8 +41,9 @@ import { Router } from '@angular/router';
 export class PagamentoPage implements OnInit {
 
   validations_form: FormGroup;
- matching_passwords_group: FormGroup;
- country_phone_group: FormGroup;
+  matching_passwords_group: FormGroup;
+  country_phone_group: FormGroup;
+  totaleDaPagare:string;
 
   countries: Array<CountryPhone>;
   genders: Array<string>;
@@ -50,6 +51,7 @@ export class PagamentoPage implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
     private router: Router,
+    private activatedRoute: ActivatedRoute
     
   ) { }
 
@@ -57,10 +59,14 @@ export class PagamentoPage implements OnInit {
     //  We just use a few random countries, however, you can use the countries you need by just adding them to this list.
     // also you can use a library to get all the countries from the world.
     this.countries = [
-      new CountryPhone('DE', 'Deutschland')
+     new CountryPhone('DE', 'Deutschland')];
      // new CountryPhone('US', 'United States')
       // new CountryPhone('BR', 'Brasil')
-    ];
+      this.activatedRoute.queryParams.subscribe(params => {
+        this.totaleDaPagare = params['totaleGenerale'];
+        console.log(this.totaleDaPagare);
+      });
+   //
 
     this.genders = [
       "Male",
@@ -152,6 +158,8 @@ export class PagamentoPage implements OnInit {
       { type: 'pattern', message: 'You must accept terms and conditions.' }
     ],
   };
+
+  
 
   onSubmit(values){
 
