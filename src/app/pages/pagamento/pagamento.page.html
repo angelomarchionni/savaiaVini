@@ -135,7 +135,7 @@
     </div> -->
 
     <ion-item>
-      <ion-label color="primary"> Tot. {{ totaleDaPagare }} Versandkostenpauschale: {{prezzoTrasporto}} Gesamtsumme: {{totaleCompresoTrasporto}}</ion-label>
+      <ion-label color="primary"> Tot.  {{ totaleDaPagare | currency:'EUR':true:'1.2-2' }} Versandkostenpauschale: {{ prezzoTrasporto | currency:'EUR':true:'1.2-2' }} Gesamtsumme:  {{ totaleCompresoTrasportoNumero | currency:'EUR':true:'1.2-2' }}</ion-label>
       <ion-checkbox color="primary" formControlName="terms"></ion-checkbox>
     </ion-item>
     <div class="validation-errors">

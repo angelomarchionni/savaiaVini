@@ -30,6 +30,7 @@ import { Validators, FormBuilder, FormGroup, FormControl,FormsModule, ReactiveFo
 // import { PasswordValidator } from '../validators/password.validator';
 import { CountryPhone } from './country-phone.model';
 import {Router, ActivatedRoute, Params} from '@angular/router';
+import { formatCurrency } from '@angular/common';
 
 
 
@@ -46,7 +47,8 @@ export class PagamentoPage implements OnInit {
   totaleDaPagare:string;
   totaleDaPagareNumero:number;
   prezzoTrasporto:number;
-  totaleCompresoTrasporto:number;
+  totaleCompresoTrasporto:string;
+  totaleCompresoTrasportoNumero:number;
 
   countries: Array<CountryPhone>;
   genders: Array<string>;
@@ -61,6 +63,7 @@ export class PagamentoPage implements OnInit {
   ngOnInit() {
     //  We just use a few random countries, however, you can use the countries you need by just adding them to this list.
     // also you can use a library to get all the countries from the world.
+    this.totaleCompresoTrasportoNumero=0;
     this.countries = [
      new CountryPhone('DE', 'Deutschland')];
      // new CountryPhone('US', 'United States')
@@ -71,7 +74,16 @@ export class PagamentoPage implements OnInit {
         console.log(this.totaleDaPagare);
       });
       this.prezzoTrasporto=7.02;
-      this.totaleCompresoTrasporto=this.prezzoTrasporto+this.totaleDaPagareNumero;
+      this.totaleCompresoTrasporto=(this.prezzoTrasporto+this.totaleDaPagareNumero).toFixed(2);
+      this.totaleCompresoTrasportoNumero=(this.prezzoTrasporto+this.totaleDaPagareNumero);
+      
+      
+      Number(this.totaleCompresoTrasporto).toFixed(2);
+      Number(this.totaleDaPagareNumero).toFixed(2);
+      Number(this.totaleCompresoTrasporto).toFixed(2);
+
+     // formatCurrency(value: number, locale: string, currency: string, currencyCode?: string, 
+   // this.totaleCompresoTrasporto=formatCurrency(value: this.totaleCompresoTrasportoNumero,currency: EUR);
    //
 
     this.genders = [
@@ -173,7 +185,7 @@ if (this.validations_form.get('country').value=='IT')
   this.prezzoTrasporto =7.02;
 
     console.log(this.prezzoTrasporto);
-    this.totaleCompresoTrasporto= this.prezzoTrasporto+this.totaleCompresoTrasporto;
+    this.totaleCompresoTrasportoNumero= this.prezzoTrasporto+this.totaleDaPagareNumero;
   }
   
 
