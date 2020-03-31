@@ -151,6 +151,9 @@ export class PagamentoPage implements OnInit {
     //   { type: 'pattern', message: 'Your username must contain only numbers and letters.' },
     //   { type: 'validUsername', message: 'Your username has already been taken.' }
     // ],
+    'country': [
+      { type: 'required', message: 'Land is required.' }
+    ],
     'name': [
       { type: 'required', message: 'Name is required.' }
     ],

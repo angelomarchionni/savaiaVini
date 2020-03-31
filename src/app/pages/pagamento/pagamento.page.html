@@ -59,10 +59,20 @@
       <ion-label position="floating" color="primary">Land</ion-label>
 
  
-      <ion-select formControlName="country" value="DE" okText="OK" cancelText="Dismiss"  (ionChange)="optionsFn();">
+      <!-- <ion-select formControlName="country" placeholder="Select One" value="DE" okText="OK" cancelText="Dismiss"  (ionChange)="optionsFn();">
+        -->
+        <ion-select formControlName="country" placeholder="Select One" okText="OK" cancelText="Dismiss"  (ionChange)="optionsFn();">
+
         <ion-select-option value="DE">Deutschland</ion-select-option>
         <ion-select-option value="IT">Italien</ion-select-option>
       </ion-select>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.country">
+          <div class="error-message" *ngIf="validations_form.get('country').hasError(validation.type) && (validations_form.get('country').dirty || validations_form.get('country').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
 
 
     </ion-item>
@@ -135,7 +145,7 @@
     </div> -->
 
     <ion-item>
-      <ion-label color="primary"> Tot.  {{ totaleDaPagare | currency:'EUR':true:'1.2-2' }} Versandkostenpauschale: {{ prezzoTrasporto | currency:'EUR':true:'1.2-2' }} Gesamtsumme:  {{ totaleCompresoTrasportoNumero | currency:'EUR':true:'1.2-2' }}</ion-label>
+      <ion-label color="primary"> Ges.  {{ totaleDaPagare | currency:'EUR':true:'1.2-2' }} Versandkostenpauschale: {{ prezzoTrasporto | currency:'EUR':true:'1.2-2' }} Gesamtsumme:  {{ totaleCompresoTrasportoNumero | currency:'EUR':true:'1.2-2' }}</ion-label>
       <ion-checkbox color="primary" formControlName="terms"></ion-checkbox>
     </ion-item>
     <div class="validation-errors">
