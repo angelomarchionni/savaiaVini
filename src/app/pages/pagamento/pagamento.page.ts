@@ -49,7 +49,8 @@ export class PagamentoPage implements OnInit {
 
   constructor(
     public formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    
   ) { }
 
   ngOnInit() {
@@ -146,17 +147,7 @@ export class PagamentoPage implements OnInit {
       { type: 'required', message: 'Phone is required.' },
       { type: 'validCountryPhone', message: 'The phone is incorrect for the selected country.' }
     ],
-    // 'password': [
-    //   { type: 'required', message: 'Password is required.' },
-    //   { type: 'minlength', message: 'Password must be at least 5 characters long.' },
-    //   { type: 'pattern', message: 'Your password must contain at least one uppercase, one lowercase, and one number.' }
-    // ],
-    // 'confirm_password': [
-    //   { type: 'required', message: 'Confirm password is required.' }
-    // ],
-    // 'matching_passwords': [
-    //   { type: 'areEqual', message: 'Password mismatch.' }
-    // ],
+   
     'terms': [
       { type: 'pattern', message: 'You must accept terms and conditions.' }
     ],
