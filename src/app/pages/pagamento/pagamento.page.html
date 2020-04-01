@@ -43,6 +43,19 @@
     </div>
 
     <ion-item>
+      <ion-label position="floating" color="primary">Postleitzahl</ion-label>
+      <ion-input type="text" formControlName="codicePostale"></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.citta">
+        <div class="error-message" *ngIf="validations_form.get('codicePostale').hasError(validation.type) && (validations_form.get('codicePostale').dirty || validations_form.get('codicePostale').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+    
+    
+    <ion-item>
       <ion-label position="floating" color="primary">Stadt</ion-label>
       <ion-input type="text" formControlName="citta"></ion-input>
     </ion-item>
@@ -61,7 +74,7 @@
  
       <!-- <ion-select formControlName="country" placeholder="Select One" value="DE" okText="OK" cancelText="Dismiss"  (ionChange)="optionsFn();">
         -->
-        <ion-select formControlName="country" placeholder="Select One" okText="OK" cancelText="Dismiss"  (ionChange)="optionsFn();">
+        <ion-select formControlName="country" placeholder="wählen" okText="OK" cancelText="Dismiss"  (ionChange)="optionsFn();">
 
         <ion-select-option value="DE">Deutschland</ion-select-option>
         <ion-select-option value="IT">Italien</ion-select-option>
@@ -85,7 +98,7 @@
  <!-- rimuovo da qui -->
 
    
- <!-- rimuovo a qui -->  
+ <!-- rimuovo a qui Postleitzahl  -->  
     <ion-item>
       <ion-label position="floating" color="primary">Email</ion-label>
       <ion-input type="text" formControlName="email"></ion-input>
@@ -145,18 +158,32 @@
     </div> -->
 
     <ion-item>
-      <ion-label color="primary"> Ges.  {{ totaleDaPagare | currency:'EUR':true:'1.2-2' }} Versandkostenpauschale: {{ prezzoTrasporto | currency:'EUR':true:'1.2-2' }} Gesamtsumme:  {{ totaleCompresoTrasportoNumero | currency:'EUR':true:'1.2-2' }}</ion-label>
-      <ion-checkbox color="primary" formControlName="terms"></ion-checkbox>
+      <ion-label color="primary"> Ges. {{ totaleDaPagare | currency:'EUR':true:'1.2-2' }}   Versandkostenpauschale: {{ prezzoTrasporto | currency:'EUR':true:'1.2-2' }} Gesamtsumme:  {{ totaleCompresoTrasportoNumero | currency:'EUR':true:'1.2-2' }}</ion-label>
+      <!-- <ion-checkbox color="primary" formControlName="terms"></ion-checkbox> -->
     </ion-item>
     <div class="validation-errors">
-      <ng-container *ngFor="let validation of validation_messages.terms">
+      <!-- <ng-container *ngFor="let validation of validation_messages.terms">
         <div class="error-message" *ngIf="validations_form.get('terms').hasError(validation.type) && (validations_form.get('terms').dirty || validations_form.get('terms').touched)">
           <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
         </div>
-      </ng-container>
+      </ng-container> -->
     </div>
 
-    <ion-button color="primary" class="submit-btn" expand="full" type="submit" [disabled]="!validations_form.valid">Submit data</ion-button>
+
+    <ion-item>
+      <ion-label color="primary"> Selezionare per conservare indirizzo al prossimo accesso</ion-label>
+     <ion-checkbox color="primary" formControlName="terms"></ion-checkbox> 
+    </ion-item>
+    <div class="validation-errors">
+      <!-- <ng-container *ngFor="let validation of validation_messages.terms">
+        <div class="error-message" *ngIf="validations_form.get('terms').hasError(validation.type) && (validations_form.get('terms').dirty || validations_form.get('terms').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container> -->
+    </div>
+
+    <ion-button color="primary" class="submit-btn" expand="full" type="submit" [disabled]="!validations_form.valid">PayPal Bezhalen</ion-button>
+    <ion-button color="primary" class="submit-btn" expand="full" type="submit" [disabled]="!validations_form.valid">Nachnahme</ion-button>
   </form>
 </ion-content>
 

@@ -63,6 +63,23 @@ export class PagamentoPage implements OnInit {
   ngOnInit() {
     //  We just use a few random countries, however, you can use the countries you need by just adding them to this list.
     // also you can use a library to get all the countries from the world.
+    console.log("sono nell init " + window.localStorage.getItem('citta'));
+    /*
+    this.validations_form.setValue({nome:[window.localStorage.getItem('nome')],
+      lastname: [window.localStorage.getItem('lastname')],
+      citta: [window.localStorage.getItem('citta')],
+      codicePostale: [window.localStorage.getItem('codicepostale')],
+      country: [window.localStorage.getItem('codicepostale')] 
+      });
+      */
+     /*
+     this.validations_form.setValue({
+       nome:[window.localStorage.getItem('nome')],
+      
+      citta: [window.localStorage.getItem('citta')]
+      });
+      */
+    
     this.totaleCompresoTrasportoNumero=0;
     this.countries = [
      new CountryPhone('DE', 'Deutschland')];
@@ -73,7 +90,7 @@ export class PagamentoPage implements OnInit {
         this.totaleDaPagareNumero = +this.totaleDaPagare;
         console.log(this.totaleDaPagare);
       });
-      this.prezzoTrasporto=7.02;
+      this.prezzoTrasporto=0;
       this.totaleCompresoTrasporto=(this.prezzoTrasporto+this.totaleDaPagareNumero).toFixed(2);
       this.totaleCompresoTrasportoNumero=(this.prezzoTrasporto+this.totaleDaPagareNumero);
       
@@ -127,7 +144,7 @@ export class PagamentoPage implements OnInit {
       indirizzo: new FormControl('', Validators.required),
       citta: new FormControl('', Validators.required),
       country: new FormControl('', Validators.required),
-      // phone: new FormControl('', Validators.required),
+      codicePostale: new FormControl('', Validators.required),
       phone: new FormControl('', Validators.compose([
         Validators.required,
         Validators.pattern(/^-?(0|[1-9]\d*)?$/)
@@ -194,10 +211,20 @@ if (this.validations_form.get('country').value=='IT')
 
   onSubmit(values){
 
+ window.localStorage.setItem('nome',this.validations_form.get('name').value);
+ window.localStorage.setItem('lastname',this.validations_form.get('lastname').value);
+ window.localStorage.setItem('indirizzo',this.validations_form.get('indirizzo').value);
+ window.localStorage.setItem('codicepostale',this.validations_form.get('codicePostale').value);
+ window.localStorage.setItem('citta',this.validations_form.get('citta').value);
+ window.localStorage.setItem('stato',this.validations_form.get('country').value);
+ window.localStorage.setItem('telefono',this.validations_form.get('phone').value);
+ window.localStorage.setItem('email',this.validations_form.get('email').value);
+ 
+//console.log(window.localStorage.getItem('pippo'));
+ // this.validations_form.get('country').value;
+  // console.log(this.validations_form.get('country').value);
 
 
-    
-    console.log(values);
     this.router.navigate(["/user"]);
   }
 
