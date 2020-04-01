@@ -241,7 +241,10 @@ if (this.validations_form.get('country').value=='IT')
     console.log(this.prezzoTrasporto);
     this.totaleCompresoTrasportoNumero= this.prezzoTrasporto+this.totaleDaPagareNumero;
   }
+  goBack() {
+    this.router.navigate(["/home"]); 
   
+  }
 
   onSubmit(values){
 
