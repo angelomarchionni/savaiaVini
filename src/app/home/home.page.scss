@@ -1,3 +1,6 @@
+@import url(http://fonts.googleapis.com/css?family=Oxygen);
+$font-family-base: "Oxygen", sans-serif !default;
+
 ion-fab-button {
   height: 70px;
   width: 70px;
@@ -31,4 +34,8 @@ ion-fab-button {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.new-background-color{
+  --background: #5beb1e;
 }

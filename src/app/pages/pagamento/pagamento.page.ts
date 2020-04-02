@@ -318,7 +318,7 @@ if (this.validations_form.get('terms').value)
       console.log("prima di alert");
   let alert = await this.alertCtrl.create({
       header: 'Thanks for your Order!',
-      message: 'E qui dovrebbe inserire oridine',
+      message: 'E qui dovrebbe inviare  oridine',
       buttons: ['OK']
     });
     alert.present().then(() => {
