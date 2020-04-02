@@ -1,13 +1,20 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>SAVAIA VINI Adresseingabe</ion-title>
-     <ion-buttons slot="start">
+   
+    <ion-title>
+      <div class="hcs">
+        <img  src="../assets/Logodefinitivomadeinitaly.png" >
+      <span>SAVAIA VINI Adresseingabe</span>
+      </div>
+      </ion-title> 
+    <ion-buttons slot="start">
       <ion-button color="dark" (click)="goBack()">
         <ion-icon name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
 
 <ion-content padding class="form-content">
   <form [formGroup]="validations_form"  (ngSubmit)="onSubmit(validations_form.value)">
@@ -162,10 +169,19 @@
       </ng-container>
     </div> -->
 
-    <ion-item>
-      <ion-label color="primary"> Ges. {{ totaleDaPagare | currency:'EUR':true:'1.2-2' }}   Versandkostenpauschale: {{ prezzoTrasporto | currency:'EUR':true:'1.2-2' }} Gesamtsumme:  {{ totaleCompresoTrasportoNumero | currency:'EUR':true:'1.2-2' }}</ion-label>
+    <ion-item lines="none" >
+      <ion-label color="primary"> Zwischensumme (inkl. MwSt.): {{ totaleDaPagare | currency:'EUR':true:'1.2-2' }}   </ion-label>
       <!-- <ion-checkbox color="primary" formControlName="terms"></ion-checkbox> -->
     </ion-item>
+    <ion-item lines="none" >
+      <ion-label color="primary"> Versandkostenpauschale (i. M.): {{ prezzoTrasporto | currency:'EUR':true:'1.2-2' }} </ion-label>
+      <!-- <ion-checkbox color="primary" formControlName="terms"></ion-checkbox> -->
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label color="primary"> Gesamtsumme (inkl. MwSt.): {{ totaleCompresoTrasportoNumero | currency:'EUR':true:'1.2-2' }}</ion-label>
+      <!-- <ion-checkbox color="primary" formControlName="terms"></ion-checkbox> -->
+    </ion-item>
+
     <div class="validation-errors">
       <!-- <ng-container *ngFor="let validation of validation_messages.terms">
         <div class="error-message" *ngIf="validations_form.get('terms').hasError(validation.type) && (validations_form.get('terms').dirty || validations_form.get('terms').touched)">
@@ -176,7 +192,7 @@
 
 
     <ion-item>
-      <ion-label color="primary"> Selezionare per conservare indirizzo al prossimo accesso</ion-label>
+      <ion-label color="primary"> Die Daten werden beim nächsten Zugriff gespeichert</ion-label>
      <ion-checkbox color="primary" formControlName="terms"></ion-checkbox> 
     </ion-item>
     <div class="validation-errors">
@@ -186,9 +202,14 @@
         </div>
       </ng-container> -->
     </div>
-
-    <ion-button color="primary" class="submit-btn" expand="full" type="submit" [disabled]="!validations_form.valid">PayPal Bezhalen</ion-button>
-    <ion-button color="primary" class="submit-btn" expand="full" type="submit" [disabled]="!validations_form.valid">Nachnahme</ion-button>
+    <ion-button [disabled]="!validations_form.valid" expand="full" (click)="checkoutACasa()">
+      Nachnahme
+    </ion-button>
+    <ion-button [disabled]="!validations_form.valid" expand="full" (click)="checkoutPaypal()">
+      PayPal Bezhalen
+    </ion-button>
+    <!-- <ion-button color="primary" class="submit-btn" expand="full" type="submit" [disabled]="!validations_form.valid">PayPal Bezhalen</ion-button>
+    <ion-button color="primary" class="submit-btn" (onClick)="checkout()" expand="full" type="ion-button" [disabled]="!validations_form.valid">Nachnahme</ion-button> -->
   </form>
 </ion-content>
 

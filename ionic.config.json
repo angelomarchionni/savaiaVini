@@ -1,5 +1,7 @@
 {
   "name": "savaiaVini",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

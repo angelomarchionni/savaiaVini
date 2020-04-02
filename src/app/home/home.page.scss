@@ -17,3 +17,18 @@ ion-fab-button {
   min-width: 25px;
   z-index: 10;
 }
+
+.savaiaViniTitolo {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  height: 70%;
+  width: 50%;
+  text-align: center;
+}
+.hcs {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

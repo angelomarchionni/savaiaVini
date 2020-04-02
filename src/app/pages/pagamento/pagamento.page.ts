@@ -31,6 +31,8 @@ import { Validators, FormBuilder, FormGroup, FormControl,FormsModule, ReactiveFo
 import { CountryPhone } from './country-phone.model';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import { formatCurrency } from '@angular/common';
+import { ModalController, AlertController } from '@ionic/angular';
+
 
 
 
@@ -67,7 +69,9 @@ export class PagamentoPage implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private modalCtrl: ModalController, 
+    private alertCtrl: AlertController
     
   ) { }
 
@@ -247,7 +251,8 @@ if (this.validations_form.get('country').value=='IT')
   }
 
   onSubmit(values){
-
+if (this.validations_form.get('terms').value)
+{
  window.localStorage.setItem('nome',this.validations_form.get('name').value);
  window.localStorage.setItem('lastname',this.validations_form.get('lastname').value);
  window.localStorage.setItem('indirizzo',this.validations_form.get('indirizzo').value);
@@ -256,14 +261,74 @@ if (this.validations_form.get('country').value=='IT')
  window.localStorage.setItem('stato',this.validations_form.get('country').value);
  window.localStorage.setItem('telefono',this.validations_form.get('phone').value);
  window.localStorage.setItem('email',this.validations_form.get('email').value);
- 
+  }
 //console.log(window.localStorage.getItem('pippo'));
  // this.validations_form.get('country').value;
   // console.log(this.validations_form.get('country').value);
 
 
-    this.router.navigate(["/user"]);
+    //this.router.navigate(["/user"]);
   }
+
+
+  async checkoutPaypal(values) {
+    // Perfom PayPal or Stripe checkout process
+
+    console.log("entro in checkout");
+    if (this.validations_form.get('terms').value)
+    {
+      console.log("entro in if");
+    window.localStorage.setItem('nome',this.validations_form.get('name').value);
+     window.localStorage.setItem('lastname',this.validations_form.get('lastname').value);
+     window.localStorage.setItem('indirizzo',this.validations_form.get('indirizzo').value);
+     window.localStorage.setItem('codicepostale',this.validations_form.get('codicePostale').value);
+     window.localStorage.setItem('citta',this.validations_form.get('citta').value);
+     window.localStorage.setItem('stato',this.validations_form.get('country').value);
+     window.localStorage.setItem('telefono',this.validations_form.get('phone').value);
+     window.localStorage.setItem('email',this.validations_form.get('email').value);
+      }
+      console.log("prima di alert");
+  let alert = await this.alertCtrl.create({
+      header: 'Thanks for your Order!',
+      message: 'E qui dovrebbe aprire paypal',
+      buttons: ['OK']
+    });
+    alert.present().then(() => {
+      // this.modalCtrl.dismiss(null, undefined);
+      this.modalCtrl.dismiss(null, undefined, null);
+    });
+  }
+
+  async checkoutACasa(values) {
+    // Perfom PayPal or Stripe checkout process
+
+    console.log("entro in checkout");
+    if (this.validations_form.get('terms').value)
+    {
+      console.log("entro in if");
+    window.localStorage.setItem('nome',this.validations_form.get('name').value);
+     window.localStorage.setItem('lastname',this.validations_form.get('lastname').value);
+     window.localStorage.setItem('indirizzo',this.validations_form.get('indirizzo').value);
+     window.localStorage.setItem('codicepostale',this.validations_form.get('codicePostale').value);
+     window.localStorage.setItem('citta',this.validations_form.get('citta').value);
+     window.localStorage.setItem('stato',this.validations_form.get('country').value);
+     window.localStorage.setItem('telefono',this.validations_form.get('phone').value);
+     window.localStorage.setItem('email',this.validations_form.get('email').value);
+      }
+      console.log("prima di alert");
+  let alert = await this.alertCtrl.create({
+      header: 'Thanks for your Order!',
+      message: 'E qui dovrebbe inserire oridine',
+      buttons: ['OK']
+    });
+    alert.present().then(() => {
+      //this.modalCtrl.dismiss();
+      this.modalCtrl.dismiss(null, undefined,null);
+    });
+  }
+
+
+
 
 }
 
