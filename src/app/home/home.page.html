@@ -29,26 +29,32 @@
     </ion-fab-button>
   </ion-fab>
   <ion-list>
-    <ion-card *ngFor="let p of products">
+    <ion-card *ngFor="let p of products;let i = index;"  [ngClass]="(i % 2 == 0) ? 'even' : 'odd'">>  
+     
       <ion-card-header>
         <ion-card-title>{{ p.name }}</ion-card-title>
       </ion-card-header>
-      <ion-card-content>
-        <ion-avatar>
-          <img src="{{ p.percorso }}">
-        </ion-avatar>
-        <ion-row class="ion-align-items-center">
-          <ion-col size="8">
-            <ion-label color="secondary">
+      <ion-card-content >
+
+           <ion-row class="ion-align-items-center">
+
+            <ion-col size="2"> 
+              <ion-avatar  >
+                <img src="{{ p.percorso }}">
+              </ion-avatar>
+            </ion-col>
+
+          <ion-col size="3"> 
+            <ion-label color="secondary" >
               <b>{{ p.price | currency:'EUR' }}</b>
             </ion-label>
           </ion-col>
-          <ion-col size="4" class="ion-text-right">
+          <ion-col size="4" class="ion-text-right"> 
             <ion-button fill="clear" (click)="addToCart(p)">
               <ion-icon name="add"></ion-icon>
             </ion-button>
           </ion-col>
-        </ion-row>
+         </ion-row> 
       </ion-card-content>
     </ion-card>
   </ion-list>
