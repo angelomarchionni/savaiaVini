@@ -32,6 +32,8 @@ import { CountryPhone } from './country-phone.model';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import { formatCurrency } from '@angular/common';
 import { ModalController, AlertController } from '@ionic/angular';
+import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal/ngx';
+
 
 
 
@@ -61,6 +63,10 @@ export class PagamentoPage implements OnInit {
   codicePostaleSalvato:string;
   emailSalvata:string;
 
+  paymentAmount: string = '';
+  currency: string = 'EUR';
+  currencyIcon: string = '€';
+
 
 
   countries: Array<CountryPhone>;
@@ -70,7 +76,8 @@ export class PagamentoPage implements OnInit {
     public formBuilder: FormBuilder,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private modalCtrl: ModalController, 
+    private modalCtrl: ModalController,
+    private paypal: PayPal, 
     private alertCtrl: AlertController
     
   ) { }
@@ -288,6 +295,7 @@ if (this.validations_form.get('terms').value)
      window.localStorage.setItem('email',this.validations_form.get('email').value);
       }
       console.log("prima di alert");
+      /*
   let alert = await this.alertCtrl.create({
       header: 'Thanks for your Order!',
       message: 'E qui dovrebbe aprire paypal',
@@ -297,6 +305,59 @@ if (this.validations_form.get('terms').value)
       // this.modalCtrl.dismiss(null, undefined);
       this.modalCtrl.dismiss(null, undefined, null);
     });
+*/
+    // qui comincia ciccia
+    this.paymentAmount = this.totaleCompresoTrasporto;
+    this.currency = 'EUR';
+    this.currencyIcon = '€';
+    // this.totaleCompresoTrasporto = "31.02";
+
+    console.log(`Pay pagamento????${this.paymentAmount}fff`);
+    console.log("Pay tot????" + this.totaleCompresoTrasporto +"fff");
+    this.paypal.init({
+      PayPalEnvironmentProduction: 'YOUR_PRODUCTION_CLIENT_ID',
+      PayPalEnvironmentSandbox: 'AYkTaCPT-FqkTZkm3Fx9RpzaaaeYou5fPFu3xHXM3DPVY9cTqR_vsFYg1iUMP7KpPevsBGKe-Irp1JsT'
+    }).then(() => {
+      // Environments: PayPalEnvironmentNoNetwork, PayPalEnvironmentSandbox, PayPalEnvironmentProduction
+      this.paypal.prepareToRender('PayPalEnvironmentSandbox', new PayPalConfiguration({
+        // Only needed if you get an "Internal Service Error" after PayPal login!
+        payPalShippingAddressOption: 2 // PayPalShippingAddressOptionPayPal
+      })).then(() => {
+        console.log("Pay sono entrato per pagare");
+        let payment = new PayPalPayment(this.totaleCompresoTrasporto, this.currency, 'Acquisto vino', 'vendita');
+        this.paypal.renderSinglePaymentUI(payment).then((res) => {
+          console.log(res);
+          // Successfully paid
+
+          // Example sandbox response
+          //
+          // {
+          //   "client": {
+          //     "environment": "sandbox",
+          //     "product_name": "PayPal iOS SDK",
+          //     "paypal_sdk_version": "2.16.0",
+          //     "platform": "iOS"
+          //   },
+          //   "response_type": "payment",
+          //   "response": {
+          //     "id": "PAY-1AB23456CD789012EF34GHIJ",
+          //     "state": "approved",
+          //     "create_time": "2016-10-03T13:33:33Z",
+          //     "intent": "sale"
+          //   }
+          // }
+        }, () => {
+          // Error or render dialog closed without being successful
+        });
+      }, () => {
+        // Error in configuration
+      });
+    }, () => {
+      // Error in initialization, maybe PayPal isn't supported or something else
+    });
+
+
+    // qui termina ciccia
   }
 
   async checkoutACasa(values) {
