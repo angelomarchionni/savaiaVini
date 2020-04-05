@@ -125,18 +125,14 @@ if(window.localStorage.getItem('email'))
         this.totaleDaPagareNumero = +this.totaleDaPagare;
         console.log(this.totaleDaPagare);
       });
-      // this.prezzoTrasporto=0;
+      
       this.totaleCompresoTrasporto=(this.prezzoTrasporto+this.totaleDaPagareNumero).toFixed(2);
       this.totaleCompresoTrasportoNumero=(this.prezzoTrasporto+this.totaleDaPagareNumero);
       
       
       Number(this.totaleCompresoTrasporto).toFixed(2);
       Number(this.totaleDaPagareNumero).toFixed(2);
-      Number(this.totaleCompresoTrasporto).toFixed(2);
-
-     // formatCurrency(value: number, locale: string, currency: string, currencyCode?: string, 
-   // this.totaleCompresoTrasporto=formatCurrency(value: this.totaleCompresoTrasportoNumero,currency: EUR);
-   //
+      
 
     this.genders = [
       "Male",
@@ -203,6 +199,8 @@ if(window.localStorage.getItem('email'))
       // matching_passwords: this.matching_passwords_group,
       terms: new FormControl(true, Validators.pattern('true'))
     });
+
+    this.optionsFn();
   }
 
   validation_messages = {
@@ -242,7 +240,7 @@ if(window.localStorage.getItem('email'))
     ],
   };
   optionsFn() {
-    console.log(this.validations_form.get('country').value);
+    console.log("faccio il checkout e vedo paese " + this.validations_form.get('country').value);
 if (this.validations_form.get('country').value=='IT')
   this.prezzoTrasporto =10.02; 
   else if 
@@ -251,6 +249,8 @@ if (this.validations_form.get('country').value=='IT')
 
     console.log(this.prezzoTrasporto);
     this.totaleCompresoTrasportoNumero= this.prezzoTrasporto+this.totaleDaPagareNumero;
+    this.totaleCompresoTrasporto = this.totaleCompresoTrasportoNumero+"";
+    console.log("totale che mi aspetto a paypal"  + this.totaleCompresoTrasporto);
   }
   goBack() {
     this.router.navigate(["/home"]); 
@@ -282,6 +282,9 @@ if (this.validations_form.get('terms').value)
     // Perfom PayPal or Stripe checkout process
 
     console.log("entro in checkout");
+    this.optionsFn();
+
+
     if (this.validations_form.get('terms').value)
     {
       console.log("entro in if");
