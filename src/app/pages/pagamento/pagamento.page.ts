@@ -282,13 +282,14 @@ if (this.validations_form.get('terms').value)
     // Perfom PayPal or Stripe checkout process
 
     console.log("entro in checkout");
+    // next instruction fill all paymente data
     this.optionsFn();
 
-
+// if I wanna save data for next time i use app just i tick the box
     if (this.validations_form.get('terms').value)
     {
       console.log("entro in if");
-    window.localStorage.setItem('nome',this.validations_form.get('name').value);
+     window.localStorage.setItem('nome',this.validations_form.get('name').value);
      window.localStorage.setItem('lastname',this.validations_form.get('lastname').value);
      window.localStorage.setItem('indirizzo',this.validations_form.get('indirizzo').value);
      window.localStorage.setItem('codicepostale',this.validations_form.get('codicePostale').value);
@@ -310,13 +311,14 @@ if (this.validations_form.get('terms').value)
     });
 */
     // qui comincia ciccia
-    this.paymentAmount = this.totaleCompresoTrasporto;
+   //  this.paymentAmount = this.totaleCompresoTrasporto;
     this.currency = 'EUR';
     this.currencyIcon = '€';
     // this.totaleCompresoTrasporto = "31.02";
 
-    console.log(`Pay pagamento????${this.paymentAmount}fff`);
+    // console.log(`Pay pagamento????${this.paymentAmount}fff`);
     console.log("Pay tot????" + this.totaleCompresoTrasporto +"fff");
+    var pippo = this.totaleCompresoTrasportoNumero+"";
     this.paypal.init({
       PayPalEnvironmentProduction: 'YOUR_PRODUCTION_CLIENT_ID',
       PayPalEnvironmentSandbox: 'AYkTaCPT-FqkTZkm3Fx9RpzaaaeYou5fPFu3xHXM3DPVY9cTqR_vsFYg1iUMP7KpPevsBGKe-Irp1JsT'
@@ -327,7 +329,7 @@ if (this.validations_form.get('terms').value)
         payPalShippingAddressOption: 2 // PayPalShippingAddressOptionPayPal
       })).then(() => {
         console.log("Pay sono entrato per pagare");
-        let payment = new PayPalPayment(this.totaleCompresoTrasporto, this.currency, 'Acquisto vino', 'vendita');
+        let payment = new PayPalPayment(pippo, this.currency, 'Acquisto vino', 'vendita');
         this.paypal.renderSinglePaymentUI(payment).then((res) => {
           console.log(res);
           // Successfully paid
