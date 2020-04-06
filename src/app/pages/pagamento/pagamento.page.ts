@@ -32,7 +32,7 @@ import { CountryPhone } from './country-phone.model';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import { formatCurrency } from '@angular/common';
 import { ModalController, AlertController } from '@ionic/angular';
-import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal/ngx';
+import { PayPal, PayPalPayment, PayPalConfiguration, PayPalPaymentDetails } from '@ionic-native/paypal/ngx';
 
 
 
@@ -53,6 +53,7 @@ export class PagamentoPage implements OnInit {
   prezzoTrasporto:number;
   totaleCompresoTrasporto:string;
   totaleCompresoTrasportoNumero:number;
+  dettagli:PayPalPaymentDetails;
 
   nomeSalvato:string;
   cognomeSalvato:string;
@@ -78,7 +79,8 @@ export class PagamentoPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private modalCtrl: ModalController,
     private paypal: PayPal, 
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+   // private shippingAddress: PayPalShippingAddress
     
   ) { }
 
@@ -281,8 +283,15 @@ if (this.validations_form.get('terms').value)
   async checkoutPaypal(values) {
     // Perfom PayPal or Stripe checkout process
 
-    console.log("entro in checkout");
-    // next instruction fill all paymente data
+    console.log("entro in checkout" + this.validations_form.get('name').value + "x");
+    var nomeSulForm = this.validations_form.get('name').value;
+    var cognomeSulForm = this.validations_form.get('lastname').value;
+    var indirizzoSulForm = this.validations_form.get('indirizzo').value;
+    var codicePostaleSulForm = this.validations_form.get('codicePostale').value;
+    var cittaSulForm = this.validations_form.get('citta').value;
+
+    var stringaDiInfo = nomeSulForm + " " + cognomeSulForm + " " + indirizzoSulForm + " " + codicePostaleSulForm + " "
++ cittaSulForm;    // next instruction fill all paymente data
     this.optionsFn();
 
 // if I wanna save data for next time i use app just i tick the box
@@ -319,6 +328,9 @@ if (this.validations_form.get('terms').value)
     // console.log(`Pay pagamento????${this.paymentAmount}fff`);
     console.log("Pay tot????" + this.totaleCompresoTrasporto +"fff");
     var pippo = this.totaleCompresoTrasportoNumero+"";
+
+  
+
     this.paypal.init({
       PayPalEnvironmentProduction: 'YOUR_PRODUCTION_CLIENT_ID',
       PayPalEnvironmentSandbox: 'AYkTaCPT-FqkTZkm3Fx9RpzaaaeYou5fPFu3xHXM3DPVY9cTqR_vsFYg1iUMP7KpPevsBGKe-Irp1JsT'
@@ -326,10 +338,28 @@ if (this.validations_form.get('terms').value)
       // Environments: PayPalEnvironmentNoNetwork, PayPalEnvironmentSandbox, PayPalEnvironmentProduction
       this.paypal.prepareToRender('PayPalEnvironmentSandbox', new PayPalConfiguration({
         // Only needed if you get an "Internal Service Error" after PayPal login!
-        payPalShippingAddressOption: 2 // PayPalShippingAddressOptionPayPal
+        payPalShippingAddressOption: 0 // PayPalShippingAddressOptionPayPal
+ 
+      
       })).then(() => {
+/*
+        let userAddress = new PayPalShippingAddress(
+          this.validations_form.get('name').value + " " + this.validations_form.get('lastname').value,
+          this.validations_form.get('indirizzo').value,
+          this.validations_form.get('phone').value,
+          this.validations_form.get('citta').value,
+          '',
+          this.validations_form.get('codicePostale').value,
+          this.validations_form.get('country').value
+        );
+*/
         console.log("Pay sono entrato per pagare");
-        let payment = new PayPalPayment(pippo, this.currency, 'Acquisto vino', 'vendita');
+        // var paymentDetails = new PayPalPaymentDetails("50.00", "0.00", "0.00");
+       
+        // let payment = new PayPalPayment(pippo, this.currency, this.validations_form.get('name').value + " " + this.validations_form.get('lastname').value + " " + this.validations_form.get('indirizzo').value+ " " + this.validations_form.get('codicepostale').value, 'vendita');
+        let payment = new PayPalPayment(pippo, this.currency, stringaDiInfo , 'vendita');
+       
+        //payment.shippingAddress = userAddress;
         this.paypal.renderSinglePaymentUI(payment).then((res) => {
           console.log(res);
           // Successfully paid
