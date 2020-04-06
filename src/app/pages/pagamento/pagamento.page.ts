@@ -32,7 +32,8 @@ import { CountryPhone } from './country-phone.model';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import { formatCurrency } from '@angular/common';
 import { ModalController, AlertController } from '@ionic/angular';
-import { PayPal, PayPalPayment, PayPalConfiguration, PayPalPaymentDetails } from '@ionic-native/paypal/ngx';
+import { PayPal, PayPalPayment, PayPalConfiguration, PayPalPaymentDetails} from '@ionic-native/paypal/ngx';
+import { async } from '@angular/core/testing';
 
 
 
@@ -328,7 +329,17 @@ if (this.validations_form.get('terms').value)
     // console.log(`Pay pagamento????${this.paymentAmount}fff`);
     console.log("Pay tot????" + this.totaleCompresoTrasporto +"fff");
     var pippo = this.totaleCompresoTrasportoNumero+"";
-
+    /*
+    let userAddress = new PayPalShippingAddress(
+      this.validations_form.get('name').value + " " + this.validations_form.get('lastname').value,
+      this.validations_form.get('indirizzo').value,
+      this.validations_form.get('phone').value,
+      this.validations_form.get('citta').value,
+      '',
+      this.validations_form.get('codicePostale').value,
+      this.validations_form.get('country').value
+    );
+    */
   
 
     this.paypal.init({
@@ -339,6 +350,7 @@ if (this.validations_form.get('terms').value)
       this.paypal.prepareToRender('PayPalEnvironmentSandbox', new PayPalConfiguration({
         // Only needed if you get an "Internal Service Error" after PayPal login!
         payPalShippingAddressOption: 0 // PayPalShippingAddressOptionPayPal
+        //PayPalShippingAddress: userAddress
  
       
       })).then(() => {
@@ -360,8 +372,34 @@ if (this.validations_form.get('terms').value)
         let payment = new PayPalPayment(pippo, this.currency, stringaDiInfo , 'vendita');
        
         //payment.shippingAddress = userAddress;
-        this.paypal.renderSinglePaymentUI(payment).then((res) => {
+        // this.paypal.renderSinglePaymentUI(payment).then((res) => {
+          this.paypal.renderSinglePaymentUI(payment).then(async(res) => {
           console.log(res);
+/*
+          console.log('pagamento efetuado');
+          let transactionId = res.response.id;
+          console.log('Your transaction id is ', transactionId);
+          //this.createCode();
+          let toast = this.modalCtrl.create({ duration: 3000, position: 'bottom' });
+          toast.setMessage('Pagamento efetuado com sucesso');
+          toast.present();
+
+*/
+
+
+ let alert = await this.alertCtrl.create({
+      header: 'Thanks for your Order!',
+      message: "ID " + res.response.id + "State " + res.response.state,
+      buttons: ['OK']
+    });
+    alert.present().then(() => {
+      // this.modalCtrl.dismiss(null, undefined);
+      this.modalCtrl.dismiss(null, undefined, null);
+    });
+
+
+
+
           // Successfully paid
 
           // Example sandbox response
@@ -383,12 +421,15 @@ if (this.validations_form.get('terms').value)
           // }
         }, () => {
           // Error or render dialog closed without being successful
+          console.log("Error or render dialog closed without being successful");
         });
       }, () => {
         // Error in configuration
+        console.log("Error in configuration");
       });
     }, () => {
       // Error in initialization, maybe PayPal isn't supported or something else
+      console.log("Error in initialization, maybe PayPal isn't supported or something else");
     });
 
 
