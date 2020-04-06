@@ -383,13 +383,15 @@ if (this.validations_form.get('terms').value)
           let toast = this.modalCtrl.create({ duration: 3000, position: 'bottom' });
           toast.setMessage('Pagamento efetuado com sucesso');
           toast.present();
+          // fico domani provo a fare il toast
+          https://ionicframework.com/docs/v3/api/components/toast/ToastController/
 
 */
 
 
  let alert = await this.alertCtrl.create({
       header: 'Thanks for your Order!',
-      message: "ID " + res.response.id + "State " + res.response.state,
+      message: "ID " + res.response.id + "State " + res.response.state + "intent " + res.response.intent,
       buttons: ['OK']
     });
     alert.present().then(() => {
