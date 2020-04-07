@@ -41,9 +41,31 @@ export class CartModalPage implements OnInit {
   }
  
   async checkout() {
+    // metto in una stringa unica il contenuto del carrello che poi passero' come parametro
+
+    var obj = {};
+    
+    //var jsonString= JSON.stringify(obj);
+
+
+
+
+    
+var i;
+for ( i=0; i<this.cart.length; i++)
+{
+  
+   obj [i]= { nomeVino: this.cart[i].name, numeroVino: this.cart[i].amount }; 
+
+}
+var jsonString= JSON.stringify(obj);
+console.log(JSON.parse(jsonString));
+
+
+
     // Perfom PayPal or Stripe checkout process
      this.router.navigate(['/pagamento'],
-          {queryParams: {totaleGenerale: this.getTotal(), test: "pluto"}});
+          {queryParams: {totaleGenerale: this.getTotal(), test: jsonString}});
           this.modalCtrl.dismiss();
      /*    
     let alert = await this.alertCtrl.create({
