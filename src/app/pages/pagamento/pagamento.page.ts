@@ -55,6 +55,7 @@ export class PagamentoPage implements OnInit {
   totaleCompresoTrasporto:string;
   totaleCompresoTrasportoNumero:number;
   dettagli:PayPalPaymentDetails;
+  jsonConCiccia:string;
 
   nomeSalvato:string;
   cognomeSalvato:string;
@@ -125,6 +126,7 @@ if(window.localStorage.getItem('email'))
       // new CountryPhone('BR', 'Brasil')
       this.activatedRoute.queryParams.subscribe(params => {
         this.totaleDaPagare = params['totaleGenerale'];
+        this.jsonConCiccia = params['test'];
         this.totaleDaPagareNumero = +this.totaleDaPagare;
         console.log(this.totaleDaPagare);
       });
@@ -290,8 +292,9 @@ if (this.validations_form.get('terms').value)
     var indirizzoSulForm = this.validations_form.get('indirizzo').value;
     var codicePostaleSulForm = this.validations_form.get('codicePostale').value;
     var cittaSulForm = this.validations_form.get('citta').value;
-
-    var stringaDiInfo = nomeSulForm + " " + cognomeSulForm + " " + indirizzoSulForm + " " + codicePostaleSulForm + " "
+    var jsonConCiccia = this.jsonConCiccia;
+// a riga successiva aggiunto il json con ciccia. In caso lo tolgo
+    var stringaDiInfo = jsonConCiccia + ";" + nomeSulForm + " " + cognomeSulForm + " " + indirizzoSulForm + " " + codicePostaleSulForm + " "
 + cittaSulForm;    // next instruction fill all paymente data
     this.optionsFn();
 
@@ -349,7 +352,8 @@ if (this.validations_form.get('terms').value)
       // Environments: PayPalEnvironmentNoNetwork, PayPalEnvironmentSandbox, PayPalEnvironmentProduction
       this.paypal.prepareToRender('PayPalEnvironmentSandbox', new PayPalConfiguration({
         // Only needed if you get an "Internal Service Error" after PayPal login!
-        payPalShippingAddressOption: 0 // PayPalShippingAddressOptionPayPal
+        payPalShippingAddressOption: 0, // PayPalShippingAddressOptionPayPal
+        //acceptCreditCards : true
         //PayPalShippingAddress: userAddress
  
       
@@ -371,6 +375,8 @@ if (this.validations_form.get('terms').value)
         // let payment = new PayPalPayment(pippo, this.currency, this.validations_form.get('name').value + " " + this.validations_form.get('lastname').value + " " + this.validations_form.get('indirizzo').value+ " " + this.validations_form.get('codicepostale').value, 'vendita');
         let payment = new PayPalPayment(pippo, this.currency, stringaDiInfo , 'vendita');
        
+        //payment.shippingAddress="via dei colombi 78";
+        //payment.items
         //payment.shippingAddress = userAddress;
         // this.paypal.renderSinglePaymentUI(payment).then((res) => {
           this.paypal.renderSinglePaymentUI(payment).then(async(res) => {
