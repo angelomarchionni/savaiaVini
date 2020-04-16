@@ -1,6 +1,27 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
- 
+
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+
+export enum SearchType {
+  all = '',
+  movie = 'movie',
+  series = 'series',
+  episode = 'episode'
+}
+export enum SearchTypeAll {
+  all = '',
+  movie = 'movie',
+  series = 'series',
+  episode = 'episode'
+}
+
+
+
+ // era interface
 export interface Product {
   id: number;
   name: string;
@@ -9,10 +30,36 @@ export interface Product {
   percorso: string;
   
 }
+
+export interface Prodotti {
+  id: number;
+  name: string;
+  price: number;
+  amount: number;
+  percorso: string;
+  
+}
+
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
+  // url = 'http://www.fevisrl.it/workflow/includes/estraiJsonPerColore.php';
+  url = 'http://localhost/workflow/includes/estraiJsonPerColore.php';
+ // urlUtenti = 'http://www.fevisrl.it/workflow/includes/estraiUltimaConnessioneUtente.php';
+ urlUtenti = 'http://localhost/workflow/includes/estraiUltimaConnessioneUtente.php';
+  urlPerStato = 'http://www.fevisrl.it/workflow/includes/estraiJsonPerStato.php';
+   apiKey = 'b25fbb24'; // <-- Enter your own key here!
+
+  /**
+   * Constructor of the Service with Dependency Injection
+   * @param http The standard Angular HttpClient to make requests
+   */
+  constructor(private http: HttpClient) { }
+
+
   data: Product[] = [
     { id: 0, name: 'Barbera D’Alba “Monforte d’alba” DOC – Cascina Merenda | Rotwein | Piemont', price: 14.16 , percorso:'https://www.madeinitaly.berlin/wp-content/uploads/2019/02/BarberaMonfalcoCASCINAMERENDA.jpg', amount: 0 },
     { id: 1, name: 'Franciacorta Satén DOCG – Lantieri | Spumante | Lombardei', price: 27.25, percorso:'https://www.madeinitaly.berlin/wp-content/uploads/2015/10/LantieriSate%CC%80n-300x300.jpg',amount: 0 },
@@ -22,12 +69,59 @@ export class CartService {
  
   private cart = [];
   private cartItemCount = new BehaviorSubject(0);
+ allNotifications: Prodotti[]; 
+  //NotificationDetail: Notification;  
  
-  constructor() {}
- 
+  private notificationsUrl = 'assets/data/notification.json';  // URL to web api 
+  private downloadsUrl = 'assets/data/download.json';  // URL to web api 
+
+ urlNuovo = this.url + "?s=ALL";
+
+  getNotifications(): Observable<Prodotti[]> {    
+       //return this.allNotifications = this.NotificationDetail.slice(0);  
+     return this.http.get<Prodotti[]>
+
+(this.urlNuovo).pipe(map(res => this.allNotifications = res))
+      } 
+   
+
+  
+/*
+  getDetails(title: string):Observable<any>{
+    return this.http.get(`${this.url}?s=${encodeURI(title)}`).pipe(
+    map(results => {
+      return results['Search'];
+    })
+    );
+  }
+*/
+
+
+   getUtenti() {
+	  alert('prendo dati utenti');
+    // return this.http.get(`${this.url}?i=${id}&plot=full`);
+	 return this.http.get(`${this.urlUtenti}`);
+  }
+  
+   searchDataUtenti(title: string): Observable<any> {
+    return this.http.get(`${this.urlUtenti}?s=${encodeURI(title)}`).pipe(
+    map(results => results['Search'])
+    );
+  }
+  
+   searchDataStato(title: string, type: SearchType): Observable<any> {
+    return this.http.get(`${this.urlPerStato}?s=${encodeURI(title)}&type=${type}&apikey=${this.apiKey}`).pipe(
+    map(results => results['Search'])
+    );
+  }
+
+
   getProducts() {
     return this.data;
   }
+
+  
+
  
   getCart() {
     return this.cart;

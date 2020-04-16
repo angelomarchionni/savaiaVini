@@ -18,10 +18,10 @@
     </ion-fab-button>
   </ion-fab>
   <ion-list>
-    <ion-card *ngFor="let p of products;let i = index;"  [ngClass]="(i % 2 == 0) ? 'even' : 'odd'">  
+    <ion-card *ngFor="let p of productsArray1;let i = index;"  [ngClass]="(i % 2 == 0) ? 'even' : 'odd'">  
      
       <ion-card-header>
-        <ion-card-title>{{ p.name }}</ion-card-title>
+        <ion-card-title>{{ p.name}}</ion-card-title>
       </ion-card-header>
       <ion-card-content >
 

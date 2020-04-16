@@ -375,7 +375,7 @@ if (this.validations_form.get('terms').value)
         // let payment = new PayPalPayment(pippo, this.currency, this.validations_form.get('name').value + " " + this.validations_form.get('lastname').value + " " + this.validations_form.get('indirizzo').value+ " " + this.validations_form.get('codicepostale').value, 'vendita');
         let payment = new PayPalPayment(pippo, this.currency, stringaDiInfo , 'vendita');
        
-        //payment.shippingAddress="via dei colombi 78";
+        
         //payment.items
         //payment.shippingAddress = userAddress;
         // this.paypal.renderSinglePaymentUI(payment).then((res) => {
