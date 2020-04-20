@@ -1,4 +1,4 @@
-import { CartService, Prodotti } from './../services/cart.service';
+import { CartService, Prodotti, SearchType } from './../services/cart.service';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { CartModalPage } from '../pages/cart-modal/cart-modal.page';
@@ -14,11 +14,12 @@ export class HomePage {
   //products = [];
   cartItemCount: BehaviorSubject<number>;
   prodotto: Observable<Prodotti>;
- 
+  scelta:string;
   productsArray = [];
   products= [];
   public productsArray1: Prodotti[];
   responseData1:string;
+  type: SearchType = SearchType.all;
 
 
   @ViewChild('cart', {static: false, read: ElementRef})fab: ElementRef;
@@ -27,10 +28,10 @@ export class HomePage {
  
   ngOnInit() {
    
-
+   // type: SearchType = SearchType.;
   // this.prodotto = this.cartService.getNotifications();
   // this.cartService.getNotifications().subscribe(data => this.productsArray = data);
-  this.cartService.getNotifications().subscribe(data => {
+  this.cartService.getNotifications('s').subscribe(data => {
 
 
   this.productsArray1 = data;
@@ -74,4 +75,24 @@ export class HomePage {
     }
     node.addEventListener('animationend', handleAnimationEnd)
   }
+
+
+  searchChanged() {
+    console.log('clicco alla ricerca' + this.type);
+    const tipologiaVino = this.type;
+    this.cartService.getNotifications(tipologiaVino).subscribe(data => {
+
+
+      this.productsArray1 = data;
+     
+      },scelta => {
+
+
+        this.scelta = this.type;
+       
+        });
+  }
+
+
+
 }

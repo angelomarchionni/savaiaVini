@@ -17,6 +17,18 @@
       <ion-icon name="cart" class="cart-icon"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
+  <ion-item>
+    <ion-label>Wählen</ion-label>
+    <ion-select [(ngModel)]="type" (ionChange)="searchChanged($event)">
+      <ion-select-option value="">Meistverkaufte Weine</ion-select-option>
+      <ion-select-option value="rot">Rotwein</ion-select-option>
+      <ion-select-option value="Weiss">WeissWine</ion-select-option>
+      <ion-select-option value="Champa">Spumante</ion-select-option>
+	  <ion-select-option value="grap">Grappz</ion-select-option>
+    </ion-select>
+  </ion-item>
+
   <ion-list>
     <ion-card *ngFor="let p of productsArray1;let i = index;"  [ngClass]="(i % 2 == 0) ? 'even' : 'odd'">  
      

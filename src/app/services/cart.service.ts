@@ -75,13 +75,14 @@ export class CartService {
   private notificationsUrl = 'assets/data/notification.json';  // URL to web api 
   private downloadsUrl = 'assets/data/download.json';  // URL to web api 
 // per default estrae ultimi 5 inseriti
- urlNuovo = this.url + "?s=a";
+ urlNuovo = this.url + "?s=";
 
-  getNotifications(): Observable<Prodotti[]> {    
+  getNotifications(tipoVino): Observable<Prodotti[]> { 
+      
        //return this.allNotifications = this.NotificationDetail.slice(0);  
      return this.http.get<Prodotti[]>
 
-(this.urlNuovo).pipe(map(res => this.allNotifications = res))
+(this.urlNuovo+tipoVino).pipe(map(res => this.allNotifications = res))
       } 
    
 
