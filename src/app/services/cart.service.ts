@@ -46,8 +46,8 @@ export interface Prodotti {
   providedIn: 'root'
 })
 export class CartService {
-  // url = 'http://www.fevisrl.it/workflow/includes/estraiJsonPerColore.php';
-  url = 'http://localhost/workflow/includes/estraiJsonPerColore.php';
+  url = 'http://www.fevisrl.it/workflow/includes/estraiJsonPerColore.php';
+ // url = 'http://localhost/workflow/includes/estraiJsonPerColore.php';
  // urlUtenti = 'http://www.fevisrl.it/workflow/includes/estraiUltimaConnessioneUtente.php';
  urlUtenti = 'http://localhost/workflow/includes/estraiUltimaConnessioneUtente.php';
   urlPerStato = 'http://www.fevisrl.it/workflow/includes/estraiJsonPerStato.php';
@@ -74,8 +74,8 @@ export class CartService {
  
   private notificationsUrl = 'assets/data/notification.json';  // URL to web api 
   private downloadsUrl = 'assets/data/download.json';  // URL to web api 
-
- urlNuovo = this.url + "?s=ALL";
+// per default estrae ultimi 5 inseriti
+ urlNuovo = this.url + "?s=a";
 
   getNotifications(): Observable<Prodotti[]> {    
        //return this.allNotifications = this.NotificationDetail.slice(0);  

@@ -33,22 +33,11 @@ export class HomePage {
   this.cartService.getNotifications().subscribe(data => {
 
 
- // console.log("xx" + data[0].id);
-  // this.responseData2 = data[1];
   this.productsArray1 = data;
-  // alert(this.productsArray1[0].name);
-  // this.responseData3 = data[2];
+ 
   });
 
-  
-   
-   //console.log("test" + this.this.responseData1);
-  
-  // console.log("test" + this.productsArray1.length);
-  //for (var product of this.productsArray1) {
-    //console.log(product.id)
-//}
-    //this.products = this.cartService.getProductsA("ALL");
+
     this.cart = this.cartService.getCart();
     this.cartItemCount = this.cartService.getCartItemCount();
   }
