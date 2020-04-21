@@ -11,7 +11,7 @@
   </ion-header>
 
 <ion-content>
-  <ion-fab vertical="top" horizontal="end" slot="fixed">
+  <ion-fab vertical="top" horizontal="center" slot="fixed">
     <ion-fab-button (click)="openCart()" #cart>
       <div class="cart-length">{{ cartItemCount | async }}</div>
       <ion-icon name="cart" class="cart-icon"></ion-icon>
@@ -20,12 +20,20 @@
 
   <ion-item>
     <ion-label>Wählen</ion-label>
-    <ion-select [(ngModel)]="type" (ionChange)="searchChanged($event)">
+    <ion-select [interfaceOptions]="customAlertOptions" [(ngModel)]="type" (ionChange)="searchChanged($event)">
       <ion-select-option value="">Meistverkaufte Weine</ion-select-option>
-      <ion-select-option value="rot">Rotwein</ion-select-option>
-      <ion-select-option value="Weiss">WeissWine</ion-select-option>
-      <ion-select-option value="Champa">Spumante</ion-select-option>
-	  <ion-select-option value="grap">Grappz</ion-select-option>
+      <ion-select-option value="OLIO">OLIO</ion-select-option>
+      <ion-select-option value="Rotwein">Rotwein</ion-select-option>
+      <ion-select-option value="WeissWein">WeissWein</ion-select-option>
+      <ion-select-option value="Rosewein">Rosewein</ion-select-option>
+      <ion-select-option value="Spumante">Spumante</ion-select-option>
+      <ion-select-option value="Champagne">Champagne</ion-select-option>
+      <ion-select-option value="Grappa">Grappa</ion-select-option>
+      <ion-select-option value="KONSERVEN">KONSERVEN</ion-select-option>
+      <ion-select-option value="WASSER">WASSER</ion-select-option>
+      <ion-select-option value="OLIO">OLIO</ion-select-option>
+      <ion-select-option value="PASTA">PASTA</ion-select-option>
+      <ion-select-option value="REIS">REIS</ion-select-option>
     </ion-select>
   </ion-item>
 

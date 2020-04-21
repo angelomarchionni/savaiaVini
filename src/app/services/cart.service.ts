@@ -10,13 +10,18 @@ export enum SearchType {
   all = '',
   movie = 'movie',
   series = 'series',
-  episode = 'episode'
+  episode = 'episode',
+  nonso = 'nonso',
+  nonso1 = 'nonso1'
+
 }
 export enum SearchTypeAll {
   all = '',
   movie = 'movie',
   series = 'series',
-  episode = 'episode'
+  episode = 'episode',
+  nonso = 'nonso',
+  nonso1 = 'nonso1'
 }
 
 

@@ -85,12 +85,7 @@ export class HomePage {
 
       this.productsArray1 = data;
      
-      },scelta => {
-
-
-        this.scelta = this.type;
-       
-        });
+      });
   }
 
 
