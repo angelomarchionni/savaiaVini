@@ -10,7 +10,7 @@
   </ion-toolbar>
   </ion-header>
 
-<ion-content>
+<ion-content padding>
   <ion-fab vertical="top" horizontal="center" slot="fixed">
     <ion-fab-button (click)="openCart()" #cart>
       <div class="cart-length">{{ cartItemCount | async }}</div>
@@ -18,17 +18,17 @@
     </ion-fab-button>
   </ion-fab>
 
-  <ion-item>
-    <ion-label>Wählen</ion-label>
-    <ion-select [interfaceOptions]="customAlertOptions" [(ngModel)]="type" (ionChange)="searchChanged($event)">
-      <ion-select-option value="">Meistverkaufte Weine</ion-select-option>
-      <ion-select-option value="OLIO">OLIO</ion-select-option>
+  <ion-item >
+    <ion-label color="danger" >Wählen</ion-label>
+    <ion-select  [(ngModel)]="type" (ionChange)="searchChanged($event)">
+      <ion-select-option value="">Meistverkaufte</ion-select-option>
       <ion-select-option value="Rotwein">Rotwein</ion-select-option>
       <ion-select-option value="WeissWein">WeissWein</ion-select-option>
       <ion-select-option value="Rosewein">Rosewein</ion-select-option>
       <ion-select-option value="Spumante">Spumante</ion-select-option>
       <ion-select-option value="Champagne">Champagne</ion-select-option>
       <ion-select-option value="Grappa">Grappa</ion-select-option>
+      <ion-select-option value="Lik">Likor</ion-select-option>
       <ion-select-option value="KONSERVEN">KONSERVEN</ion-select-option>
       <ion-select-option value="WASSER">WASSER</ion-select-option>
       <ion-select-option value="OLIO">OLIO</ion-select-option>

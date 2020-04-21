@@ -45,3 +45,19 @@ ion-fab-button {
 .even{
   background-color: lightgrey !important;
 }
+.rosso{
+  background-color: red !important;
+}
+
+.item-radio-checked.item ion-label {
+  color: blue !important; //your color here for selected option
+}
+.item-radio.item ion-label {
+  color: red; //your color here
+  }
+
+.myCustomSelect{
+  max-width: 100% !important;
+  max-block-size: 100% !important;
+  max-lines: 11 !important;
+ }
