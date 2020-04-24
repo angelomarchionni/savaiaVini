@@ -18,12 +18,12 @@
     </ion-fab-button>
   </ion-fab>
 
-  <ion-item >
-    <ion-label color="danger" >Wählen</ion-label>
-    <ion-select  [(ngModel)]="type" (ionChange)="searchChanged($event)">
-      <ion-select-option value="">Meistverkaufte</ion-select-option>
-      <ion-select-option value="Rotwein">Rotwein</ion-select-option>
-      <ion-select-option value="WeissWein">WeissWein</ion-select-option>
+  <ion-item color="newcolor">
+    <ion-label color="secondary" >Wählen</ion-label>
+    <ion-select [interfaceOptions]="customAlertOptions" interface="popover" [(ngModel)]="type" (ionChange)="searchChanged($event)">
+      <ion-select-option color="secondary" value="">Meistverkaufte</ion-select-option>
+      <ion-select-option id="rot" value="Rotwein">Rotwein</ion-select-option>
+      <ion-select-option color="dark" value="WeissWein">WeissWein</ion-select-option>
       <ion-select-option value="Rosewein">Rosewein</ion-select-option>
       <ion-select-option value="Spumante">Spumante</ion-select-option>
       <ion-select-option value="Champagne">Champagne</ion-select-option>

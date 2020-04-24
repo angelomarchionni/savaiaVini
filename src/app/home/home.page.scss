@@ -61,3 +61,27 @@ ion-fab-button {
   max-block-size: 100% !important;
   max-lines: 11 !important;
  }
+ .item .item-content {
+  background-color: transparent !important;
+}
+
+.ion-color-newcolor {
+  --ion-color-base: #e2f5f8;
+  --ion-color-contrast: #56b4d3;
+}
+.alert-radio-icon{
+  border-radius: 0 !important;
+  border: none !important;
+  height: 40px !important;
+  width: 40px !important;
+  background-size: 40px 40px !important;
+  background-repeat: no-repeat ;
+  background-color: seagreen !important;
+}
+
+
+ 
+
+
+
+

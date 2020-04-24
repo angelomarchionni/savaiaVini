@@ -1,28 +1,3 @@
-/*
-import { Component, OnInit } from '@angular/core';
-import {Router, ActivatedRoute, Params} from '@angular/router';
-
-@Component({
-  selector: 'app-pagamento',
-  templateUrl: './pagamento.page.html',
-  styleUrls: ['./pagamento.page.scss'],
-})
-export class PagamentoPage implements OnInit {
-
-  constructor(private activatedRoute: ActivatedRoute) {}
-
-  ngOnInit() {
-
-    this.activatedRoute.queryParams.subscribe(params => {
-      const tot = params['totaleGenerale'];
-      console.log(tot);
-    });
-
-  }
-
-}
-
-*/
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl,FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { UsernameValidator } from '../validators/username.validator';
@@ -34,6 +9,7 @@ import { formatCurrency } from '@angular/common';
 import { ModalController, AlertController } from '@ionic/angular';
 import { PayPal, PayPalPayment, PayPalConfiguration, PayPalPaymentDetails} from '@ionic-native/paypal/ngx';
 import { async } from '@angular/core/testing';
+import { CartService, Prodotti, SearchType } from './../../services/cart.service';
 
 
 
@@ -56,7 +32,9 @@ export class PagamentoPage implements OnInit {
   totaleCompresoTrasportoNumero:number;
   dettagli:PayPalPaymentDetails;
   jsonConCiccia:string;
-
+  //cartservice:CartService;
+  //modalCtrl:ModalController;
+// https://forum.ionicframework.com/t/solved-ionic-4-need-to-know-how-to-work-the-modal-controller/136414/4
   nomeSalvato:string;
   cognomeSalvato:string;
   indirizzoSalvato:string;
@@ -83,6 +61,7 @@ export class PagamentoPage implements OnInit {
     private paypal: PayPal, 
     private alertCtrl: AlertController,
    // private shippingAddress: PayPalShippingAddress
+   private cartservice: CartService,
     
   ) { }
 
@@ -404,6 +383,9 @@ if (this.validations_form.get('terms').value)
       // this.modalCtrl.dismiss(null, undefined);
       this.modalCtrl.dismiss(null, undefined, null);
     });
+    this.cartservice.inviaEmail(jsonConCiccia,res.response.id,this.emailSalvata);
+
+    // this.cartservice.inviaEmail("jsonciccia","identifiativo","angeloMarchionni");
 
 
 

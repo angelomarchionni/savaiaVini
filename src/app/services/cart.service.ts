@@ -44,6 +44,14 @@ export interface Prodotti {
   percorso: string;
   
 }
+export interface Email {
+  idApprovazione: number;
+  statusApprovazione: string;
+  emailApprovazione: string;
+  prodottiAcquistati: Prodotti;
+  
+  
+}
 
 
 
@@ -55,6 +63,7 @@ export class CartService {
  // url = 'http://localhost/workflow/includes/estraiJsonPerColore.php';
  // urlUtenti = 'http://www.fevisrl.it/workflow/includes/estraiUltimaConnessioneUtente.php';
  urlUtenti = 'http://localhost/workflow/includes/estraiUltimaConnessioneUtente.php';
+ urlEmail = 'http://localhost/workflow/includes/inviaEmailPerAcquisto.php';
   urlPerStato = 'http://www.fevisrl.it/workflow/includes/estraiJsonPerStato.php';
    apiKey = 'b25fbb24'; // <-- Enter your own key here!
 
@@ -90,7 +99,7 @@ export class CartService {
 (this.urlNuovo+tipoVino).pipe(map(res => this.allNotifications = res))
       } 
    
-
+     
   
 /*
   getDetails(title: string):Observable<any>{
@@ -114,6 +123,20 @@ export class CartService {
     map(results => results['Search'])
     );
   }
+
+
+  inviaEmail(ilComprato:string,id:string,email:string): Observable<string> { 
+      
+    return this.http.get(`${this.inviaEmail}?s=${ilComprato}&type=${id}&apikey=${email}`).pipe(
+    map(results => results['Search'])
+    );
+
+
+
+
+   }
+
+
   
    searchDataStato(title: string, type: SearchType): Observable<any> {
     return this.http.get(`${this.urlPerStato}?s=${encodeURI(title)}&type=${type}&apikey=${this.apiKey}`).pipe(
