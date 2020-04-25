@@ -63,7 +63,7 @@ export class CartService {
  // url = 'http://localhost/workflow/includes/estraiJsonPerColore.php';
  // urlUtenti = 'http://www.fevisrl.it/workflow/includes/estraiUltimaConnessioneUtente.php';
  urlUtenti = 'http://localhost/workflow/includes/estraiUltimaConnessioneUtente.php';
- urlEmail = 'http://localhost/workflow/includes/inviaEmailPerAcquisto.php';
+ urlEmail = 'http://www.fevisrl.it/workflow/includes/inviaEmail.php';
   urlPerStato = 'http://www.fevisrl.it/workflow/includes/estraiJsonPerStato.php';
    apiKey = 'b25fbb24'; // <-- Enter your own key here!
 
@@ -127,12 +127,12 @@ export class CartService {
 
   inviaEmail(ilComprato:string,id:string,email:string): Observable<string> { 
       
-    return this.http.get(`${this.inviaEmail}?s=${ilComprato}&type=${id}&apikey=${email}`).pipe(
+    console.log("sono proprio nella funzione");
+    
+    return this.http.get(`${this.urlEmail}?s=${ilComprato}&type=${id}&apikey=${email}`).pipe(
     map(results => results['Search'])
     );
-
-
-
+  
 
    }
 

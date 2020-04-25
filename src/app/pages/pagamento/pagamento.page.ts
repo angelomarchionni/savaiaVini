@@ -10,7 +10,7 @@ import { ModalController, AlertController } from '@ionic/angular';
 import { PayPal, PayPalPayment, PayPalConfiguration, PayPalPaymentDetails} from '@ionic-native/paypal/ngx';
 import { async } from '@angular/core/testing';
 import { CartService, Prodotti, SearchType } from './../../services/cart.service';
-
+import { Observable } from 'rxjs';
 
 
 
@@ -48,8 +48,8 @@ export class PagamentoPage implements OnInit {
   currency: string = 'EUR';
   currencyIcon: string = '€';
 
-
-
+  
+  risposta: string;
   countries: Array<CountryPhone>;
   genders: Array<string>;
 
@@ -375,15 +375,28 @@ if (this.validations_form.get('terms').value)
 
 
  let alert = await this.alertCtrl.create({
-      header: 'Thanks for your Order!',
+      header: 'Grazie per il tuo ordine!',
       message: "ID " + res.response.id + "State " + res.response.state + "intent " + res.response.intent,
       buttons: ['OK']
     });
+    console.log("prima dell invio della email");
+    //this.risposta = this.cartservice.inviaEmail(jsonConCiccia,res.response.id,this.emailSalvata);
+    
+    this.cartservice.inviaEmail(jsonConCiccia,res.response.id,this.emailSalvata).subscribe(data => {
+
+
+      this.risposta = data;
+     
+      });
+    
+    
+   // this.cartservice.searchDataUtenti(jsonConCiccia);
+    console.log("dopo dell invio della email" );
     alert.present().then(() => {
       // this.modalCtrl.dismiss(null, undefined);
-      this.modalCtrl.dismiss(null, undefined, null);
+      this.alertCtrl.dismiss(null, undefined, null);
     });
-    this.cartservice.inviaEmail(jsonConCiccia,res.response.id,this.emailSalvata);
+   
 
     // this.cartservice.inviaEmail("jsonciccia","identifiativo","angeloMarchionni");
 
@@ -450,7 +463,7 @@ if (this.validations_form.get('terms').value)
     });
     alert.present().then(() => {
       //this.modalCtrl.dismiss();
-      this.modalCtrl.dismiss(null, undefined,null);
+      this.alertCtrl.dismiss(null, undefined,null);
     });
   }
 
