@@ -66,8 +66,7 @@ export class PagamentoPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    //  We just use a few random countries, however, you can use the countries you need by just adding them to this list.
-    // also you can use a library to get all the countries from the world.
+
     console.log("sono nell init " + window.localStorage.getItem('citta'));
 if(window.localStorage.getItem('nome'))
     this.nomeSalvato = window.localStorage.getItem('nome');
@@ -375,14 +374,20 @@ if (this.validations_form.get('terms').value)
 
 
  let alert = await this.alertCtrl.create({
-      header: 'Grazie per il tuo ordine!',
+      header: 'Danke für die Bestellung!',
       message: "ID " + res.response.id + "State " + res.response.state + "intent " + res.response.intent,
       buttons: ['OK']
     });
     console.log("prima dell invio della email");
     //this.risposta = this.cartservice.inviaEmail(jsonConCiccia,res.response.id,this.emailSalvata);
     
-    this.cartservice.inviaEmail(jsonConCiccia,res.response.id,this.emailSalvata).subscribe(data => {
+
+    let formObj = this.validations_form.getRawValue(); // {name: '', description: ''}
+    let serializedForm = JSON.stringify(formObj);
+    console.log("serializedForm" + serializedForm);
+
+
+    this.cartservice.inviaEmail(serializedForm,encodeURIComponent(jsonConCiccia),res.response.id,res.response.state,this.emailSalvata).subscribe(data => {
 
 
       this.risposta = data;

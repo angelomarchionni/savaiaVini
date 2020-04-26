@@ -125,11 +125,11 @@ export class CartService {
   }
 
 
-  inviaEmail(ilComprato:string,id:string,email:string): Observable<string> { 
+  inviaEmail(ilForm:string,ilComprato:string,id:string,status1:string,email:string): Observable<string> { 
       
     console.log("sono proprio nella funzione");
     
-    return this.http.get(`${this.urlEmail}?s=${ilComprato}&type=${id}&apikey=${email}`).pipe(
+    return this.http.get(`${this.urlEmail}?s=${ilComprato}&id=${id}&status=${status1}&apikey=${email}&ilform=${ilForm}`).pipe(
     map(results => results['Search'])
     );
   
