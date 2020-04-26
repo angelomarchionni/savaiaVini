@@ -383,11 +383,13 @@ if (this.validations_form.get('terms').value)
     
 
     let formObj = this.validations_form.getRawValue(); // {name: '', description: ''}
+    let emailVera = this.validations_form.controls['email'].value;
     let serializedForm = JSON.stringify(formObj);
     console.log("serializedForm" + serializedForm);
+    console.log("emailVera" + emailVera);
 
 
-    this.cartservice.inviaEmail(serializedForm,encodeURIComponent(jsonConCiccia),res.response.id,res.response.state,this.emailSalvata).subscribe(data => {
+    this.cartservice.inviaEmail(serializedForm,encodeURIComponent(jsonConCiccia),res.response.id,res.response.state,emailVera).subscribe(data => {
 
 
       this.risposta = data;
