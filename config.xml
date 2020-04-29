@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="io.ionic.starter" version="0.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>SAVAIAVINI</name>
     <description>applicazione per savaiavini</description>
     <author email="angelo_mar@yahoo.com" href="http://ionicframework.com/">Angelo Marchionni</author>
@@ -14,7 +14,7 @@
     <preference name="ScrollEnabled" value="false" />
     <preference name="android-minSdkVersion" value="19" />
     <preference name="BackupWebStorage" value="none" />
-    <preference name="SplashMaintainAspectRatio" value="true" />
+    <preference name="SplashMaintainAspectRatio" value="false" />
     <preference name="FadeSplashScreenDuration" value="300" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
@@ -31,18 +31,18 @@
         <icon density="xhdpi" src="resources/android/icon/logoSavaiaVini.png" />
         <icon density="xxhdpi" src="resources/android/icon/logoSavaiaVini.png" />
         <icon density="xxxhdpi" src="resources/android/icon/logoSavaiaVini.png" />
-        <splash density="land-ldpi" src="resources/android/splash/drawable-land-ldpi-screen.png" />
-        <splash density="land-mdpi" src="resources/android/splash/drawable-land-mdpi-screen.png" />
-        <splash density="land-hdpi" src="resources/android/splash/drawable-land-hdpi-screen.png" />
-        <splash density="land-xhdpi" src="resources/android/splash/drawable-land-xhdpi-screen.png" />
-        <splash density="land-xxhdpi" src="resources/android/splash/drawable-land-xxhdpi-screen.png" />
-        <splash density="land-xxxhdpi" src="resources/android/splash/drawable-land-xxxhdpi-screen.png" />
-        <splash density="port-ldpi" src="resources/android/splash/drawable-port-ldpi-screen.png" />
-        <splash density="port-mdpi" src="resources/android/splash/drawable-port-mdpi-screen.png" />
-        <splash density="port-hdpi" src="resources/android/splash/drawable-port-hdpi-screen.png" />
-        <splash density="port-xhdpi" src="resources/android/splash/drawable-port-xhdpi-screen.png" />
-        <splash density="port-xxhdpi" src="resources/android/splash/drawable-port-xxhdpi-screen.png" />
-        <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
+        <splash density="land-ldpi" src="resources/android/splash/SavaiaSplashmdpinew.png" />
+        <splash density="land-mdpi" src="resources/android/splash/SavaiaSplashmdpinew.png" />
+        <splash density="land-hdpi" src="resources/android/splash/SavaiaSplashhdpinew.png" />
+        <splash density="land-xhdpi" src="resources/android/splash/SavaiaSplashxhdpinew.png" />
+        <splash density="land-xxhdpi" src="resources/android/splash/SavaiaSplashxxhdpinew.png" />
+        <splash density="land-xxxhdpi" src="resources/android/splash/SavaiaSplashxxxhdpinew.png" />
+        <splash density="port-ldpi" src="resources/android/splash/SavaiaSplashmdpinew.png" />
+        <splash density="port-mdpi" src="resources/android/splash/SavaiaSplashmdpinew.png" />
+        <splash density="port-hdpi" src="resources/android/splash/SavaiaSplashhdpinew.png" />
+        <splash density="port-xhdpi" src="resources/android/splash/SavaiaSplashxhdpinew.png" />
+        <splash density="port-xxhdpi" src="resources/android/splash/SavaiaSplashxxhdpinew.png" />
+        <splash density="port-xxxhdpi" src="resources/android/splash/SavaiaSplashxxxhdpinew.png" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />

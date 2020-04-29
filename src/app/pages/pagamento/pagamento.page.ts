@@ -447,7 +447,9 @@ if (this.validations_form.get('terms').value)
   }
 
   async checkoutACasa(values) {
-    // Perfom PayPal or Stripe checkout process
+    // 
+    // questo metodo dovrebbe solo ordinare e poi si paga tipo in contrassegno
+    // ed è il pulsantino sopra paypal ... 
 
     console.log("entro in checkout");
     if (this.validations_form.get('terms').value)
@@ -465,12 +467,13 @@ if (this.validations_form.get('terms').value)
       console.log("prima di alert");
   let alert = await this.alertCtrl.create({
       header: 'Thanks for your Order!',
-      message: 'E qui dovrebbe inviare  oridine',
+      message: 'Pagherai quando riceverai gli oggetti',
       buttons: ['OK']
     });
     alert.present().then(() => {
       //this.modalCtrl.dismiss();
-      this.alertCtrl.dismiss(null, undefined,null);
+      // this.alertCtrl.dismiss(null, undefined,null);
+      this.alertCtrl.dismiss();
     });
   }
 
