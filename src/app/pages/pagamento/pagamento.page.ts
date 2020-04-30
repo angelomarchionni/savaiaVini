@@ -30,6 +30,7 @@ export class PagamentoPage implements OnInit {
   prezzoTrasporto:number;
   totaleCompresoTrasporto:string;
   totaleCompresoTrasportoNumero:number;
+  prezzoCompletoDaInviare:string;
   dettagli:PayPalPaymentDetails;
   jsonConCiccia:string;
   //cartservice:CartService;
@@ -112,7 +113,7 @@ if(window.localStorage.getItem('email'))
       this.totaleCompresoTrasporto=(this.prezzoTrasporto+this.totaleDaPagareNumero).toFixed(2);
       this.totaleCompresoTrasportoNumero=(this.prezzoTrasporto+this.totaleDaPagareNumero);
       
-      
+      this.prezzoCompletoDaInviare = this.totaleCompresoTrasporto + ";" + this.prezzoTrasporto + ";" + this.totaleDaPagare;
       Number(this.totaleCompresoTrasporto).toFixed(2);
       Number(this.totaleDaPagareNumero).toFixed(2);
       
@@ -389,7 +390,7 @@ if (this.validations_form.get('terms').value)
     console.log("emailVera" + emailVera);
 
 
-    this.cartservice.inviaEmail(serializedForm,encodeURIComponent(jsonConCiccia),res.response.id,res.response.state,emailVera).subscribe(data => {
+    this.cartservice.inviaEmail(serializedForm,encodeURIComponent(jsonConCiccia),res.response.id,res.response.state,emailVera,this.prezzoCompletoDaInviare).subscribe(data => {
 
 
       this.risposta = data;
@@ -479,7 +480,7 @@ if (this.validations_form.get('terms').value)
     console.log("emailVera" + emailVera);
 
 
-    this.cartservice.inviaEmail(serializedForm,encodeURIComponent(this.jsonConCiccia),"Contanti","approved",emailVera).subscribe(data => {
+    this.cartservice.inviaEmail(serializedForm,encodeURIComponent(this.jsonConCiccia),"Contanti","approved",emailVera,this.prezzoCompletoDaInviare).subscribe(data => {
 
 
       this.risposta = data;
