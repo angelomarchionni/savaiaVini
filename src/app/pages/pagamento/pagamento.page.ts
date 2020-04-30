@@ -467,13 +467,32 @@ if (this.validations_form.get('terms').value)
       console.log("prima di alert");
   let alert = await this.alertCtrl.create({
       header: 'Thanks for your Order!',
-      message: 'Pagherai quando riceverai gli oggetti',
+      message: 'Ti è stata inviata email di conferma. Pagherai quando riceverai gli oggetti',
       buttons: ['OK']
     });
+    console.log("dopo dell invio della email" );
+
+    let formObj = this.validations_form.getRawValue(); // {name: '', description: ''}
+    let emailVera = this.validations_form.controls['email'].value;
+    let serializedForm = JSON.stringify(formObj);
+    console.log("serializedForm" + serializedForm);
+    console.log("emailVera" + emailVera);
+
+
+    this.cartservice.inviaEmail(serializedForm,encodeURIComponent(this.jsonConCiccia),"Contanti","approved",emailVera).subscribe(data => {
+
+
+      this.risposta = data;
+     
+      });
+
+
+
+
+
     alert.present().then(() => {
-      //this.modalCtrl.dismiss();
-      // this.alertCtrl.dismiss(null, undefined,null);
-      this.alertCtrl.dismiss();
+      // this.modalCtrl.dismiss(null, undefined);
+      this.alertCtrl.dismiss(null, undefined, null);
     });
   }
 
