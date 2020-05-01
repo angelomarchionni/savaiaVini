@@ -273,8 +273,8 @@ if (this.validations_form.get('terms').value)
     var cittaSulForm = this.validations_form.get('citta').value;
     var jsonConCiccia = this.jsonConCiccia;
 // a riga successiva aggiunto il json con ciccia. In caso lo tolgo
-    var stringaDiInfo = jsonConCiccia + ";" + nomeSulForm + " " + cognomeSulForm + " " + indirizzoSulForm + " " + codicePostaleSulForm + " "
-+ cittaSulForm;    // next instruction fill all paymente data
+    var stringaDiInfo =  nomeSulForm + " " + cognomeSulForm + " " + indirizzoSulForm + " " + codicePostaleSulForm + " "
++ cittaSulForm + ";" + jsonConCiccia;    // next instruction fill all paymente data
     this.optionsFn();
 
 // if I wanna save data for next time i use app just i tick the box
